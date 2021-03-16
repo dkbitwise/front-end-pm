@@ -80,6 +80,8 @@ class FEP_Message {
 	}
 	
 	public function insert( $data_array = array() ){
+        //error_log(print_r($data_array, true));
+        //error_log(print_r($data_array['participants'], true));
 		global $wpdb;
 		
 		if( ! empty( $this->mgs_id ) ){
@@ -121,6 +123,8 @@ class FEP_Message {
 		$wpdb->insert( FEP_MESSAGE_TABLE, $data, $column_formats );
 		$this->mgs_id = $wpdb->insert_id;
 		
+		//error_log(print_r($this->mgs_id, true));
+
 		if( $this->mgs_id && isset( $data_array['participants'] ) ){
 			$this->insert_participants( $data_array['participants'] );
 		}

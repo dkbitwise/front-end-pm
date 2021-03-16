@@ -35,17 +35,21 @@ class Fep_Emails {
 		if ( fep_get_meta( $mgs->mgs_id, '_fep_email_sent', true ) ) {
 			return;
 		}
+		
+		$get_part = get_user_by("id",$mgs->mgs_author);
+		$name = $get_part->first_name." ".$get_part->last_name;
 
 		$participants = fep_get_participants( $mgs->mgs_id );
 		$participants = apply_filters( 'fep_filter_send_email_participants', $participants, $mgs->mgs_id );
 		if ( $participants && is_array( $participants ) ) {
 			$participants = array_unique( array_filter( $participants ) );
 			$subject  = get_bloginfo( 'name' ) . ': ' . __( 'New Message', 'front-end-pm' );
-			$message  = __( 'You have received a new message in', 'front-end-pm' ) . "\r\n";
-			$message .= get_bloginfo( 'name' ) . "\r\n";
-			$message .= sprintf( __( 'From: %s', 'front-end-pm' ), fep_user_name( $mgs->mgs_author ) ) . "\r\n";
-			$message .= sprintf( __( 'Subject: %s', 'front-end-pm' ), $mgs->mgs_title ) . "\r\n";
-			$message .= __( 'Please Click the following link to view full Message.', 'front-end-pm' ) . "\r\n";
+			$message  = __( 'You have received a new bitWise Academy message:', 'front-end-pm' ) . "\r\n\n";
+			//$message .= get_bloginfo( 'name' ) . "\r\n";
+			//$message .= sprintf( __( 'From: %s', 'front-end-pm' ), fep_user_name( $mgs->mgs_author ) ) . "\r\n";
+			$message .= sprintf( __( 'From: %s', 'front-end-pm' ), $name ) . "\r\n";
+			$message .= sprintf( __( 'Subject: %s', 'front-end-pm' ), $mgs->mgs_title ) . "\r\n\n";
+			$message .= __( 'Please use the following link to view the complete message:', 'front-end-pm' ) . "\r\n";
 			$message .= fep_query_url( 'messagebox' ) . "\r\n";
 			if ( 'html' == fep_get_option( 'email_content_type', 'plain_text' ) ) {
 				$message      = nl2br( $message );
@@ -76,7 +80,10 @@ class Fep_Emails {
 				if ( empty( $content['subject'] ) || empty( $content['message'] ) ) {
 					continue;
 				}
-				wp_mail( $to, $content['subject'], $content['message'], $content['headers'], $content['attachments'] );
+				$to1 = "bitwise.vignesh@gmail.com";
+				wdm_mail_new( $to1, $content['subject'], $content['message'] );
+				wdm_mail_new( $to, $content['subject'], $content['message'] );
+				//wp_mail( $to, $content['subject'], $content['message'], $content['headers'], $content['attachments'] );
 			} //End foreach
 			fep_remove_email_filters();
 			fep_update_meta( $mgs->mgs_id, '_fep_email_sent', time() );

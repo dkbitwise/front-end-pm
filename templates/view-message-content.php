@@ -60,17 +60,18 @@ if ( $messages->have_messages() ) {
 					}
 					?></div>
 					<?php if ( $toggle_feature ) { ?>
-					<div class="fep-align-right">
+					<!--<div class="fep-align-right">
 						<button class="fep-button fep-message-toggle-all"><?php esc_html_e( 'Toggle Messages', 'front-end-pm' ); ?></button>
-					</div>
+					</div>-->
 					<?php } ?>
 				</div>
 				<?php
 			} ?>
 			<div id="fep-message-<?php echo fep_get_the_id(); ?>" class="<?php echo fep_sanitize_html_class( $per_mgs_class ); ?>">
-				<div class="fep-message-title fep-message-title-<?php echo fep_get_the_id(); ?>">
+				<div class="">
+				<!--<div class="fep-message-title fep-message-title-<?php echo fep_get_the_id(); ?>">-->
 					<div class="author"><?php echo fep_user_name( fep_get_message_field( 'mgs_author' ) ); ?></div>
-					<div class="date"><?php echo fep_get_the_date(); ?></div>
+					<div style="pointer-events: none!important; margin-left: 5px; font-weight: bold" class="date"><?php echo fep_get_the_date(); ?></div>
 				</div>
 				<div class="<?php echo fep_sanitize_html_class( $content_class ); ?>">
 					<?php echo fep_get_the_content();

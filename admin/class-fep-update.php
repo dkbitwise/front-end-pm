@@ -427,7 +427,7 @@ class Fep_Update {
 			'mgs_type'              => 'announcement',
 			'mgs_status'            => $announcement->post_status,
 		);
-		
+
 		$mgs_obj = new FEP_Message;
 		$ann_id = $mgs_obj->insert( $arr );
 		
@@ -494,6 +494,7 @@ class Fep_Update {
 			$arr['mgs_last_reply_excerpt'] = fep_get_the_excerpt_from_content( 100, get_post_field('post_content', get_post_meta( $message->ID, '_fep_last_reply_id', true ) ) );
 			$arr['mgs_last_reply_time'] = get_post_field('post_date_gmt', get_post_meta( $message->ID, '_fep_last_reply_id', true ) );
 		}
+
 		$mgs_obj = new FEP_Message;
 		$message_id = $mgs_obj->insert( $arr );
 		

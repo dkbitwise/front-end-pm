@@ -260,7 +260,8 @@ class Fep_Form {
 					if( ! empty( $field['suggestion'] ) ) : ?>
 						<?php wp_enqueue_script( 'fep-script' ); ?>
 						<input type="hidden" name="message_to" id="fep-message-to" autocomplete="off" value="<?php echo esc_attr( $message_to ); ?>" />
-						<input type="text" class="<?php echo $field['class']; ?>" name="message_top" id="fep-message-top" autocomplete="off" placeholder="<?php echo esc_attr( $field['placeholder'] ); ?>" value="<?php echo esc_attr( $message_top ); ?>" />
+						<input readonly type="text" class="<?php echo $field['class']; ?>" name="message_stop" id="fep-message-stop" autocomplete="off" placeholder="" value="<?php echo esc_attr( $_GET['sname'] ); ?>" />
+						<input type="hidden" class="<?php echo $field['class']; ?>" name="message_top" id="fep-message-top" autocomplete="off" placeholder="<?php echo esc_attr( $field['placeholder'] ); ?>" value="<?php echo esc_attr( $message_top ); ?>" />
 						<div id="fep-result"></div>
 					<?php else : ?>
 						<input type="text" class="<?php echo $field['class']; ?>" name="message_to" id="fep-message-top" placeholder="<?php echo esc_attr( $field['noscript-placeholder'] ); ?>" autocomplete="off" value="<?php echo esc_attr( $message_to ); ?>" />
